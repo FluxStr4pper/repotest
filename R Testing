@@ -1,0 +1,40 @@
+#loaddata
+library(datasets)
+data("mtcars")
+
+#view first 5 rows
+head(mtcars,5)
+
+#checking information bout datasets
+?mtcars
+
+#install ggplot2
+install.packages("ggplot2")
+
+#load ggplot package
+library(ggplot2)
+
+#make scatterplot with ggplot
+ggplot(aes(x=disp, y=mpg), data=mtcars)+geom_point()+ggtitle("displacement vs miles per galon")+labs(x="displacement", y="miles per galon")
+
+#change 'vs' from integer to factor
+mtcars$vs <- as.factor(mtcars$vs)
+
+#create boxplot from vs and mpg
+ggplot(aes(x=vs, y=mpg), data=mtcars)+geom_boxplot()+ggtitle("Engine shaped vs miles per galon")+labs(x="engine shaped", y="miles per galon")
+
+#boxplot colouring
+ggplot(aes(x=vs, y=mpg, fill = vs), data = mtcars) + 
+  geom_boxplot(alpha=0.3) +
+  theme(legend.position="none") +
+  ggtitle("Engine shaped vs miles per galon")+labs(x="engine shaped", y="miles per galon")
+
+#make histogram of weight
+ggplot(aes(x=wt, fill = wt),data=mtcars) + geom_histogram(binwidth=0.5)
+
+#histogram coloring
+ggplot(aes(x = wt, fill = wt), data = mtcars) +
+  geom_histogram(alpha = 0.3, bins = 15) +
+  theme(legend.position = "none") +
+  ggtitle("Weight Histogram") +
+  scale_fill_gradient(low = "blue", high = "red")
